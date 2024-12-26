@@ -1,0 +1,30 @@
+{
+	"contentrating" : "Everyone",
+	"description" : "",
+	"file" : "wallpaper.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			}
+		}
+	},
+	"preview" : "preview.jpg",
+	"ratingsex" : "none",
+	"ratingviolence" : "none",
+	"snapshotformat" : -1,
+	"snapshotoverlay" : "",
+	"tags" : [ "Technology" ],
+	"title" : "JS Wallpaper",
+	"type" : "Web",
+	"version" : 5,
+	"visibility" : "public",
+	"workshopid" : "3392101305",
+	"workshopurl" : "steam://url/CommunityFilePage/3392101305"
+}
