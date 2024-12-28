@@ -1,6 +1,6 @@
 {
 	"contentrating" : "Everyone",
-	"description" : "",
+	"description" : "IMPORTANT: You can assign your city in the project.json of the wallpaper, with the format \"city, province/state, country\". You can disable the weather animations from the proyect.json, set true or false.",
 	"file" : "wallpaper.html",
 	"general" : 
 	{
@@ -12,6 +12,14 @@
 				"text" : "ui_browse_properties_scheme_color",
 				"type" : "color",
 				"value" : "0 0 0"
+			},
+			"city" : 
+			{
+				"value": ""
+			},
+			"weather" :
+			{
+				"value" : true
 			}
 		}
 	},
@@ -20,10 +28,10 @@
 	"ratingviolence" : "none",
 	"snapshotformat" : -1,
 	"snapshotoverlay" : "",
-	"tags" : [ "Technology" ],
-	"title" : "JS Wallpaper",
+	"tags" : [ "Technology", "Weather", "Clock", "City", "JavaScript" ],
+	"title" : "Clock and Weather JavaScript Wallpaper",
 	"type" : "Web",
-	"version" : 5,
+	"version" : 6,
 	"visibility" : "public",
 	"workshopid" : "3392101305",
 	"workshopurl" : "steam://url/CommunityFilePage/3392101305"
