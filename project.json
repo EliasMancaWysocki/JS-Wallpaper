@@ -6,19 +6,20 @@
 	{
 		"properties" : 
 		{
-			"schemecolor" : 
-			{
-				"order" : 0,
-				"text" : "ui_browse_properties_scheme_color",
-				"type" : "color",
-				"value" : "0 0 0"
-			},
 			"city" : 
 			{
-				"value": ""
+				"index" : 0,
+				"order" : 100,
+				"text" : "City",
+				"type" : "textinput",
+				"value" : "La Calera, Córdoba"
 			},
-			"weather" :
+			"weather" : 
 			{
+				"index" : 1,
+				"order" : 101,
+				"text" : "Weather",
+				"type" : "bool",
 				"value" : true
 			}
 		}
