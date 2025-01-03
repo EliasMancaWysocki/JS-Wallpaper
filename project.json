@@ -12,7 +12,14 @@
 				"order" : 100,
 				"text" : "City",
 				"type" : "textinput",
-				"value" : "La Calera, Córdoba"
+				"value" : ""
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
 			},
 			"weather" : 
 			{

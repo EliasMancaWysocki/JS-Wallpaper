@@ -31,8 +31,6 @@ window.wallpaperPropertyListener = {
         } else {
             city = '';
         }
-
-        
     }
 };
 
@@ -42,11 +40,11 @@ let city;
 let weatherFunction;
 
 ensureSunAndMoon();
-setInterval(ensureSunAndMoon, 60000); // Cada segundo actualiza su posición
+setInterval(ensureSunAndMoon, 60000);
 
 async function getWeather() {
     try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
         if (!response.ok) {
 
             throw new Error(`Error: ${response.status} - ${response.statusText}`);
@@ -73,7 +71,8 @@ async function getWeather() {
         }
     } catch (error) {
         console.error("Hubo un problema con la solicitud del clima:", error);
-        $('#city').text("muere");
+        $('#city').text("Not available");
+        $('#temperature').text("Not available");
         $('#weather').text("Not available");
         stopAllAnimations();
     }
