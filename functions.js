@@ -18,7 +18,7 @@ setInterval(updateClock, 1);
 window.wallpaperPropertyListener = {
     applyUserProperties: function (properties) {
 
-        if (properties.weather) {
+        if (properties.weather !== undefined) {
             weatherFunction = properties.weather.value;
         } else {
             weatherFunction = true;
@@ -27,46 +27,48 @@ window.wallpaperPropertyListener = {
         if (properties.city) {
             city = properties.city.value;
             getWeather();
-            setInterval(getWeather, 1800000);
+            clearInterval(weatherRefreshInterval);
+            weatherRefreshInterval = setInterval(getWeather, 1800000);
         } else {
             city = '';
         }
     }
 };
 
-const apiKey = "525ee573f0fffb372bd679c4ec659fa6";
-let url;
 let city;
 let weatherFunction;
+let weatherRefreshInterval = null;
 
 ensureSunAndMoon();
 setInterval(ensureSunAndMoon, 60000);
 
 async function getWeather() {
+    if (!city) return;
     try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+        const response = await fetch(`https://wttr.in/${encodeURIComponent(city)}?format=j1`);
         if (!response.ok) {
-
             throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
         const weatherData = await response.json();
-        const weatherDescription = weatherData.weather[0].description.toLowerCase();
+        const description = weatherData.current_condition[0].weatherDesc[0].value.toLowerCase();
+        const temp = weatherData.current_condition[0].temp_C;
+        const cityName = weatherData.nearest_area[0].areaName[0].value;
 
-        $('#city').text(weatherData.name);
-        $('#temperature').text(`${Math.round(weatherData.main.temp)}°C`);
-        $('#weather').text(weatherData.weather[0].description);
+        $('#city').text(cityName);
+        $('#temperature').text(`${Math.round(temp)}°C`);
+        $('#weather').text(weatherData.current_condition[0].weatherDesc[0].value);
 
         stopAllAnimations();
 
         if (weatherFunction) {
-            if (weatherDescription.includes('rain')) {
+            if (description.includes('rain') || description.includes('drizzle')) {
                 startRainAnimation();
-            } else if (weatherDescription.includes('cloud')) {
-                startCloudyAnimation();
-            } else if (weatherDescription.includes('storm')) {
+            } else if (description.includes('thunder') || description.includes('storm')) {
                 startStormAnimation();
-            } else if (weatherDescription.includes('snow')) {
+            } else if (description.includes('snow') || description.includes('blizzard') || description.includes('sleet') || description.includes('ice pellet')) {
                 startSnowAnimation();
+            } else if (description.includes('cloud') || description.includes('overcast')) {
+                startCloudyAnimation();
             }
         }
     } catch (error) {
