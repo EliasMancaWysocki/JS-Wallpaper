@@ -1,22 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wallpaper Interactivo</title>
-
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- JQuery -->
     <script src="jquery.js"></script>
 </head>
-
 <body>
-    <div id="wallpaper">
-        <p class="clock" id="container">
-<span class='mediumpurple'>const</span> data <span class='deepskyblue'>=</span> <span class='cornflowerblue'>{</span>
+
+    <div id="app">
+
+        <nav id="sidebar">
+            <div id="sidebar-title">Explorer</div>
+            <ul id="file-tree">
+                <li class="tree-item tree-folder">
+                    <span class="tree-arrow">▾</span> wallpaper
+                </li>
+                <li class="tree-item tree-indent tree-folder">
+                    <span class="tree-arrow">▾</span> modules
+                </li>
+                <li class="tree-item tree-indent2">
+                    <span class="tree-icon">◦</span> animations.js
+                </li>
+                <li class="tree-item tree-indent2">
+                    <span class="tree-icon">◦</span> celestial.js
+                </li>
+                <li class="tree-item tree-indent2">
+                    <span class="tree-icon">◦</span> clock.js
+                </li>
+                <li class="tree-item tree-indent2">
+                    <span class="tree-icon">◦</span> player.js
+                </li>
+                <li class="tree-item tree-indent2">
+                    <span class="tree-icon">◦</span> weather.js
+                </li>
+                <li class="tree-item tree-indent tree-active">
+                    <span class="tree-icon">◦</span> data.js
+                </li>
+                <li class="tree-item tree-indent">
+                    <span class="tree-icon">◦</span> main.js
+                </li>
+                <li class="tree-item tree-indent">
+                    <span class="tree-icon">◦</span> style.css
+                </li>
+            </ul>
+            <div id="animation-panel">
+                <div id="animation-panel-label">// weather</div>
+                <div id="animation-container"></div>
+            </div>
+        </nav>
+
+        <div id="editor-area">
+            <div id="tab-bar">
+                <div class="tab tab-active">
+                    data.js <span class="tab-close">×</span>
+                </div>
+                <div class="tab" id="tab-player">
+                    player.js <span class="tab-close">×</span>
+                </div>
+            </div>
+            <div id="wallpaper">
+
+                <div class="editor-pane">
+                    <div class="line-numbers">
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+                        <span>7</span>
+                        <span>8</span>
+                        <span>9</span>
+                        <span>10</span>
+                        <span>11</span>
+                    </div>
+                    <p class="clock" id="container"><span class='mediumpurple'>const</span> data <span class='deepskyblue'>=</span> <span class='cornflowerblue'>{</span>
     <span class='greenyellow'>hour:</span> <span id='hour'>00</span>,
     <span class='greenyellow'>minutes:</span> <span id='minutes'>00</span>,
     <span class='greenyellow'>seconds:</span> <span id='seconds'>00</span>,
@@ -24,15 +84,46 @@
     <span class='greenyellow'>month:</span> <span id='month'>10</span>,
     <span class='greenyellow'>year:</span> <span id='year'>200</span>,
     <span class='greenyellow'>city:</span> <span id='city'>Not available</span>,
-    <span class='greenyellow'>temperature:</span> <span id='temperature'>Not available</span>
+    <span class='greenyellow'>temperature:</span> <span id='temperature'>Not available</span>,
     <span class='greenyellow'>weather:</span> <span id='weather'>Not available</span>
-<span class='cornflowerblue'>}</span>
-        </p>
-    </div>
-    
-    <!-- JavaScript -->
-    <script src='weather.js'></script>
-    <script src='functions.js'></script>
-</body>
+<span class='cornflowerblue'>}</span></p>
+                </div>
 
+                <div id="pane-divider"></div>
+
+                <div class="editor-pane" id="player-pane">
+                    <div class="line-numbers">
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+                    </div>
+                    <p class="clock" id="player-block"><span class='mediumpurple'>const</span> player <span class='deepskyblue'>=</span> <span class='cornflowerblue'>{</span>
+    <span class='greenyellow'>track:</span>    "<span id='player-track'>—</span>",
+    <span class='greenyellow'>artist:</span>   "<span id='player-artist'>—</span>",
+    <span class='greenyellow'>state:</span>    <span id='player-state' class='mediumpurple'>null</span>,
+    <span class='greenyellow'>progress:</span> <span id='player-bar' class='cornflowerblue'>[──────────────────]</span> <span id='player-time'>—:—— / —:——</span>
+<span class='cornflowerblue'>}</span></p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="status-bar">
+        <span id="status-left"></span>
+        <span id="status-right"></span>
+    </div>
+
+    <script src='modules/animations.js'></script>
+    <script src='modules/celestial.js'></script>
+    <script src='modules/weather.js'></script>
+    <script src='modules/player.js'></script>
+    <script src='modules/clock.js'></script>
+    <script src='main.js'></script>
+
+</body>
 </html>

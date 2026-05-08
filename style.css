@@ -1,3 +1,5 @@
+/* ─── Base ───────────────────────────────────────────── */
+
 body {
     margin: 0;
     overflow: hidden;
@@ -5,123 +7,294 @@ body {
     color: white;
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     height: 100vh;
     width: 100%;
 }
 
-#wallpaper {
-    width: auto; /* El ancho se adapta automáticamente según el contenido */
-    height: 100vh; /* Altura total de la pantalla */
+/* ─── App layout ─────────────────────────────────────── */
+
+#app {
     display: flex;
+    flex-direction: row;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ─── Sidebar / Explorer ─────────────────────────────── */
+
+#sidebar {
+    width: 200px;
+    min-width: 200px;
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+    display: flex;
+    flex-direction: column;
+    font-family: monospace;
+    user-select: none;
+}
+
+#sidebar-title {
+    padding: 8px 12px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#file-tree {
+    list-style: none;
+    padding: 4px 0;
+    margin: 0;
+    flex: 1;
+}
+
+.tree-item {
+    padding: 3px 10px;
+    color: rgba(255, 255, 255, 0.45);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+}
+
+.tree-indent  { padding-left: 24px; }
+.tree-indent2 { padding-left: 38px; }
+.tree-folder  { color: rgba(255, 255, 255, 0.65); }
+.tree-active  { background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.9); }
+.tree-arrow   { font-size: 10px; opacity: 0.7; }
+.tree-icon    { font-size: 10px; opacity: 0.5; }
+
+/* ─── Animation panel ────────────────────────────────── */
+
+#animation-panel {
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 8px;
+}
+
+#animation-panel-label {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.25);
+    margin-bottom: 6px;
+    font-family: monospace;
+}
+
+#animation-container {
+    width: 100%;
+    height: 150px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ─── Editor area ────────────────────────────────────── */
+
+#editor-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#tab-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    height: 35px;
+    font-family: monospace;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.35);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: default;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.tab-active {
+    color: rgba(255, 255, 255, 0.85);
+    background: #1e1e2f;
+    border-top: 1px solid mediumpurple;
+}
+
+.tab-close {
+    font-family: sans-serif;
+    font-size: 15px;
+    opacity: 0.3;
+    line-height: 1;
+}
+
+#tab-player {
+    opacity: 0;
+    max-width: 0;
+    overflow: hidden;
+    padding: 0;
+    transition: opacity 1.5s ease, max-width 1.5s ease, padding 1.5s ease;
+}
+
+#tab-player.visible {
+    opacity: 1;
+    max-width: 200px;
+    padding: 0 16px;
+}
+
+#wallpaper {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
+.editor-pane {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.line-numbers {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.2);
+    font-family: monospace;
+    font-size: 2.5vw;
+    line-height: 1.5;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+}
+
+.line-numbers span {
+    display: block;
+    line-height: 1.5;
+}
+
+/* ─── Code blocks ────────────────────────────────────── */
+
 .clock {
-    font-family: monospace; /* Para que el texto parezca código */
-    font-size: 2.5vw; /* Tamaño del texto dinámico según el ancho de pantalla */
-    white-space: pre-wrap; /* Mantén los saltos de línea y espacios exactos */
-    line-height: 1.5; /* Ajusta el espaciado entre líneas */
+    font-family: monospace;
+    font-size: 2.5vw;
+    white-space: pre-wrap;
+    line-height: 1.5;
     text-align: left;
     color: white;
+    margin: 0;
+    padding: 0;
+}
+
+#pane-divider {
+    width: 1px;
+    align-self: stretch;
+    background: rgba(255, 255, 255, 0.07);
+    opacity: 0;
+    margin: 0;
+    transition: opacity 1.5s ease, margin 1.5s ease;
+}
+
+#pane-divider.visible {
+    opacity: 1;
+    margin: 0 3vw;
+}
+
+#player-pane {
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease, max-width 1.5s ease;
+}
+
+#player-pane.visible {
+    max-width: 45vw;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 @media (max-width: 1200px) {
-    .clock {
-        font-size: 3.5vw; /* Tamaño más grande para pantallas pequeñas */
-    }
+    .clock        { font-size: 3.5vw; }
+    .line-numbers { font-size: 3.5vw; }
+    #player-pane  { display: none; }
+    #pane-divider { display: none; }
+    #tab-player   { display: none; }
 }
 
-/* Estilo para pantallas pequeñas */
 @media (max-width: 768px) {
-    .clock {
-        font-size: 7vw; /* Tamaño más grande para pantallas pequeñas */
-    }
+    .clock        { font-size: 7vw; }
+    .line-numbers { font-size: 7vw; }
+    #sidebar      { display: none; }
 }
 
-/* Estilo para las gotas de lluvia */
+/* ─── Weather animations (contenidas en #animation-container) */
+
 .rain-drop {
-    position: fixed;
-    width: 2px;
-    height: 10px;
+    position: absolute;
+    width: 1px;
+    height: 8px;
     background: deepskyblue;
-    top: -20px;
-    left: 0;
-    z-index: 10;
     border-radius: 50%;
 }
 
-#container {
-    position: relative;
-    z-index: 2; /* Asegúrate de que el texto esté al frente */
-}
-.sun, .moon {
-    position: fixed;
-    z-index: 0; /* Asegúrate de que estén detrás del texto */
-}
 .sun {
+    position: absolute;
     background: yellow;
+    border-radius: 50%;
+    animation: pulse 10s infinite ease-in-out;
 }
+
 .moon {
+    position: absolute;
     background: white;
+    border-radius: 50%;
+    animation: pulse 10s infinite ease-in-out;
 }
 
-.sun {
-    animation: sun-move 10s infinite ease-in-out;
-}
-
-/* Movimiento opcional para un efecto más dinámico */
-@keyframes sun-move {
-    from {
-        transform: scale(0.95);
-    }
-    to {
-        transform: scale(1.05);
-    }
-}
-
-.moon {
-    animation: moon-move 10s infinite ease-in-out;
-}
-
-/* Movimiento opcional para un efecto más dinámico */
-@keyframes moon-move {
-    from {
-        transform: scale(0.95);
-    }
-    to {
-        transform: scale(1.05);
-    }
+@keyframes pulse {
+    from { transform: scale(0.95); }
+    to   { transform: scale(1.05); }
 }
 
 .cloud {
-    position: fixed;
-    width: 150px; /* Tamaño ajustable */
-    height: 80px; /* Más esponjoso */
+    position: absolute;
     background: #ccc;
-    border-radius: 50%; /* Bordes redondeados */
-    box-shadow: 
-        20px 10px 30px rgba(0, 0, 0, 0.3), 
-        -10px 0px 30px rgba(0, 0, 0, 0.2); /* Sombras suaves */
-    z-index: 1; /* Por delante del sol y la luna */
-    opacity: 0.9; /* Transparencia inicial */
-    transition: opacity 0.3s; /* Suaviza los cambios de transparencia */
+    border-radius: 50%;
+    box-shadow: 8px 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 0.85;
+    transition: opacity 0.3s;
 }
 
-.mediumpurple {
-    color: mediumpurple;
+/* ─── Status bar ─────────────────────────────────────── */
+
+#status-bar {
+    height: 22px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.04);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-family: monospace;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.03em;
 }
 
-.cornflowerblue {
-    color: cornflowerblue;
-}
+/* ─── Syntax highlighting ────────────────────────────── */
 
-.deepskyblue {
-    color: deepskyblue;
-}
-
-.greenyellow {
-    color: greenyellow;
-}
+.mediumpurple   { color: mediumpurple; }
+.cornflowerblue { color: cornflowerblue; }
+.deepskyblue    { color: deepskyblue; }
+.greenyellow    { color: greenyellow; }
