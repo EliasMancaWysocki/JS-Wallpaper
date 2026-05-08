@@ -13,10 +13,15 @@ function updateClock() {
 }
 updateClock();
 
-setInterval(updateClock, 1);
+setInterval(updateClock, 500);
 
 window.wallpaperPropertyListener = {
     applyUserProperties: function (properties) {
+
+        if (properties.schemecolor) {
+            const [r, g, b] = properties.schemecolor.value.split(' ').map(v => Math.round(parseFloat(v) * 255));
+            document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        }
 
         if (properties.weather !== undefined) {
             weatherFunction = properties.weather.value;

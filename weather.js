@@ -35,23 +35,9 @@ function stopRainAnimation() {
     document.querySelectorAll('.rain-drop').forEach(drop => drop.remove()); // Eliminar gotas existentes
 }
 
-let simulatedTime = null; // Variable para definir una hora simulada
-
-function setSimulatedTime(hour, minute = 0) {
-    simulatedTime = { hour, minute };
-    updateAnimations(); // Llama a las animaciones con la hora simulada
-}
-
-function getCurrentTime() {
-    if (simulatedTime) {
-        return simulatedTime.hour + simulatedTime.minute / 60; // Hora simulada
-    }
-    const now = new Date();
-    return now.getHours() + now.getMinutes() / 60; // Hora real
-}
-
 function ensureSunAndMoon() {
-    const hours = getCurrentTime(); // Hora actual o simulada
+    const now = new Date();
+    const hours = now.getHours() + now.getMinutes() / 60;
     const sunrise = 6;
     const sunset = 19;
 
@@ -271,24 +257,3 @@ function stopAllAnimations() {
     stopSnowAnimation();
 }
 
-function updateAnimations() {
-    // Asegúrate de que el sol y la luna estén actualizados
-    ensureSunAndMoon();
-
-    // Detén todas las animaciones previas
-    stopAllAnimations();
-
-    // Ejemplo de descripción del clima (puedes reemplazarlo con la lógica real)
-    const weatherDescription = 'clear'; // Cambia esto para probar otros climas
-
-    // Inicia las animaciones según el clima
-    if (weatherDescription.includes('rain')) {
-        startRainAnimation();
-    } else if (weatherDescription.includes('cloud')) {
-        startCloudyAnimation();
-    } else if (weatherDescription.includes('storm')) {
-        startStormAnimation();
-    } else if (weatherDescription.includes('snow')) {
-        startSnowAnimation();
-    }
-}
